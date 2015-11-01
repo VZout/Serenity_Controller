@@ -2,8 +2,6 @@
 Arduino script for custom VR Controller. Not recommended to copy due to crappy code.
 
 # Setup guide
-Really crappy code not recommended to copy. 
-
 A0 = x accel1
 
 A1 = y accel1
