@@ -14,4 +14,4 @@ A5 = y accel2
 
 13 = sleep accel2
 
-accel 2 11 && 12 && 3v not connected to save kabel space
+accel 2 11 && 12 && 3v not connected to save cabel space

@@ -44,12 +44,19 @@ void setup()
   Serial.begin(9600);
   setupAccel1();
   setupAccel2();
+
+  
+  pinMode(0, OUTPUT);
+  pinMode(1, OUTPUT);
+  
+    
+  digitalWrite(1, HIGH);
 }
 
 void setupAccel2() {
   accelero.begin(13, 12, 11, 10, A4, A5, A6);
   accelero.setARefVoltage(5);                   //sets the AREF voltage to 3.3V
-  accelero.setSensitivity(LOW);                   //sets the sensitivity to +/-6G
+  accelero.setSensitivity(HIGH);                   //sets the sensitivity to +/-6G
   accelero.calibrate();
 }
 
@@ -62,7 +69,7 @@ value_x = analogRead(0);
 value_y = analogRead(1);
 value_z = analogRead(2);
 
-/*xv=(value_x/1024.0*ADC_ref-zero_x)/sensitivity_x;
+xv=(value_x/1024.0*ADC_ref-zero_x)/sensitivity_x;
 
 Serial.print ("x= ");
 Serial.print (xv);
@@ -107,13 +114,46 @@ angle_z =atan2(-yv,-xv)*57.2957795+180;
 Serial.print(angle_z);
 Serial.print(" deg");
 Serial.print("\n");
-*/
+
 
 Joystick.button(1, 1);
 Joystick.X(value_x - 148); // 148 to correct for faulty accelerometer
 Joystick.Y(value_y - 148); // 148 to correct for faulty accelerometer
 Serial.println(value_x);
+Serial.println("break");
 Serial.println(value_y);
+/*
+if(value_x > 700) {
+  digitalWrite(0, HIGH);
+  Keyboard.release('w');
+  Keyboard.press('a');
+  Keyboard.release('s');
+  Keyboard.release('d');
+} else if(value_x < 570) {
+  digitalWrite(0, HIGH);
+  Keyboard.release('w');
+  Keyboard.release('a');
+  Keyboard.release('s');
+  Keyboard.press('d');
+} else if(value_y > 720) {
+  digitalWrite(0, HIGH);
+  Keyboard.release('w');
+  Keyboard.release('a');
+  Keyboard.press('s');
+  Keyboard.release('d');
+} else if(value_y < 570) {
+  digitalWrite(0, HIGH);
+  Keyboard.press('w');
+  Keyboard.release('a');
+  Keyboard.release('s');
+  Keyboard.release('d');
+} else {
+  digitalWrite(0, LOW);
+  Keyboard.release('w');
+  Keyboard.release('a');
+  Keyboard.release('s');
+  Keyboard.release('d');
+}*/
 }
 
 void accel2() {
@@ -126,12 +166,51 @@ void accel2() {
   Serial.print(y);
   Serial.print("\tz: ");
   Serial.print(z);
+  
+  
+if(x > 450) {
+  digitalWrite(1, HIGH);
+  Keyboard.release('h');
+  Keyboard.press('b');
+  Keyboard.release('n');
+  Keyboard.release('m');
+} else if(x < 260) {
+  digitalWrite(1, HIGH);
+  Keyboard.release('h');
+  Keyboard.release('b');
+  Keyboard.release('n');
+  Keyboard.press('m');
+} else if(y > 470) {
+  digitalWrite(1, HIGH);
+  Keyboard.release('h');
+  Keyboard.release('b');
+  Keyboard.press('n');
+  Keyboard.release('m');
+} else if(y < 270) {
+  digitalWrite(1, HIGH);
+  Keyboard.press('h');
+  Keyboard.release('b');
+  Keyboard.release('n');
+  Keyboard.release('m');
+} else {
+  digitalWrite(1, LOW);
+  Keyboard.release('h');
+  Keyboard.release('b');
+  Keyboard.release('n');
+  Keyboard.release('m');
+}
+  
+  if(x > 450 || x < 260 || y > 470 || y < 270) {
+  //digitalWrite(1, LOW);
+} else {
+ // digitalWrite(1, LOW);
+}
 }
 
 void loop() {
   accel1();
   accel2();
-  delay(100);
+  delay(0);
 }
 
 
